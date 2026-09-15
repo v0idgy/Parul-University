@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+
 // Definition of a Node
 struct Node
 {
@@ -12,30 +13,32 @@ struct Node
         next = nullptr;
     }
 };
+
 // Circular Linked List Class
 class CircularLinkedList
 {
 private:
     Node *tail; // Tracks the last node of the list
+
 public:
     CircularLinkedList()
     {
         tail = nullptr;
     }
+
     // 1. Insert a node at the beginning
     void insertAtBeginning(int val)
     {
         Node *newNode = new Node(val);
-        // If the list is empty
         if (tail == nullptr)
         {
             tail = newNode;
-            tail->next = tail; // Points to itself
+            tail->next = tail;
         }
         else
         {
-            newNode->next = tail->next; // New node points to the current head
-            tail->next = newNode;       // Tail points to the new head
+            newNode->next = tail->next;
+            tail->next = newNode;
         }
         std::cout << val << " inserted at the beginning.\n";
     }
@@ -51,9 +54,9 @@ public:
         }
         else
         {
-            newNode->next = tail->next; // New node points to head
-            tail->next = newNode;       // Old tail points to new node
-            tail = newNode;             // Update tail to be the new node
+            newNode->next = tail->next;
+            tail->next = newNode;
+            tail = newNode;
         }
         std::cout << val << " inserted at the end.\n";
     }
@@ -67,7 +70,6 @@ public:
             return;
         }
         Node *head = tail->next;
-        // Case where there is only one node in the list
         if (tail == head)
         {
             delete head;
@@ -75,8 +77,8 @@ public:
         }
         else
         {
-            tail->next = head->next; // Bypass the old head
-            delete head;             // Free memory
+            tail->next = head->next;
+            delete head;
         }
         std::cout << "Deleted node from the beginning.\n";
     }
@@ -92,7 +94,6 @@ public:
 
         Node *head = tail->next;
 
-        // Case where there is only one node in the list
         if (tail == head)
         {
             delete tail;
@@ -101,14 +102,13 @@ public:
         else
         {
             Node *curr = head;
-            // Traverse to find the second-to-last node
             while (curr->next != tail)
             {
                 curr = curr->next;
             }
-            curr->next = tail->next; // Second-to-last node points to head
-            delete tail;             // Free old tail memory
-            tail = curr;             // Update tail pointer
+            curr->next = tail->next;
+            delete tail;
+            tail = curr;
         }
         std::cout << "Deleted node from the end.\n";
     }
@@ -122,13 +122,13 @@ public:
             return;
         }
 
-        Node *curr = tail->next; // Start from the head node
+        Node *curr = tail->next;
         std::cout << "Circular Linked List: ";
         do
         {
             std::cout << curr->data << " -> ";
             curr = curr->next;
-        } while (curr != tail->next); // Stop when we loop back to head
+        } while (curr != tail->next);
         std::cout << "(back to start)\n";
     }
 };
@@ -137,19 +137,25 @@ int main()
 {
     CircularLinkedList cll;
 
-    // Perform Insertion Operations
-    cll.insertAtEnd(10);
-    cll.insertAtEnd(20);
-    cll.insertAtBeginning(5);
-    cll.insertAtEnd(30);
-    cll.display(); // Output: 5 -> 10 -> 20 -> 30 -> (back to start)
+    // 1. Insert 10 elements (values 10, 20, ..., 100)
+    std::cout << "--- Inserting 10 Elements ---\n";
+    for (int i = 1; i <= 10; ++i)
+    {
+        cll.insertAtEnd(i * 10);
+    }
+    cll.display();
 
-    // Perform Deletion Operations
+    // 2. Remove 2 elements from the beginning
+    std::cout << "\n--- Deleting 2 Elements from Beginning ---\n";
     cll.deleteFromBeginning();
-    cll.display(); // Output: 10 -> 20 -> 30 -> (back to start)
+    cll.deleteFromBeginning();
+    cll.display();
 
+    // 3. Remove 2 elements from the end
+    std::cout << "\n--- Deleting 2 Elements from End ---\n";
     cll.deleteFromEnd();
-    cll.display(); // Output: 10 -> 20 -> (back to start)
+    cll.deleteFromEnd();
+    cll.display();
 
     return 0;
 }
