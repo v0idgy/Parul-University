@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 // Definition of a Node
 struct Node
 {
