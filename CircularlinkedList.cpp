@@ -12,24 +12,20 @@ struct Node
         next = nullptr;
     }
 };
-
 // Circular Linked List Class
 class CircularLinkedList
 {
 private:
     Node *tail; // Tracks the last node of the list
-
 public:
     CircularLinkedList()
     {
         tail = nullptr;
     }
-
     // 1. Insert a node at the beginning
     void insertAtBeginning(int val)
     {
         Node *newNode = new Node(val);
-
         // If the list is empty
         if (tail == nullptr)
         {
@@ -48,7 +44,6 @@ public:
     void insertAtEnd(int val)
     {
         Node *newNode = new Node(val);
-
         if (tail == nullptr)
         {
             tail = newNode;
@@ -71,9 +66,7 @@ public:
             std::cout << "List is empty. Nothing to delete.\n";
             return;
         }
-
         Node *head = tail->next;
-
         // Case where there is only one node in the list
         if (tail == head)
         {
