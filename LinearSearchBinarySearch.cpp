@@ -25,11 +25,9 @@ int binarySearch(const vector<int> &arr, int target)
 {
     int low = 0;
     int high = arr.size() - 1;
-
     while (low <= high)
     {
         int mid = low + (high - low) / 2; // Prevents potential integer overflow
-
         if (arr[mid] == target)
         {
             return mid; // Target found
